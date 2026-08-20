@@ -224,12 +224,13 @@ def analyze_audio_bytes(audio_bytes: bytes) -> dict:
 
     except Exception as e:
         print(f"[ML] Error during analysis: {e}")
-        # Return a neutral (average) reading rather than zeros
+        # If librosa fails to process the audio (e.g., completely silent, empty, or corrupted),
+        # we must return 0 words so the frontend knows it was invalid.
         return {
-            "block_count":        1,
-            "repetition_count":   1,
+            "block_count":        0,
+            "repetition_count":   0,
             "prolongation_count": 0,
             "interjection_count": 0,
-            "speech_rate":        120.0,
-            "total_words":        10,
+            "speech_rate":        0.0,
+            "total_words":        0,
         }
