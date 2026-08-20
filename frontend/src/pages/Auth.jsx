@@ -45,8 +45,12 @@ export default function Auth() {
           navigate('/dashboard');
         }
       } catch (profileErr) {
-        // 404 means no profile
-        navigate('/onboarding');
+        if (profileErr.response && profileErr.response.status === 404) {
+          // 404 means no profile
+          navigate('/onboarding');
+        } else {
+          throw profileErr; // Re-throw to be caught by the outer catch block
+        }
       }
 
     } catch (err) {

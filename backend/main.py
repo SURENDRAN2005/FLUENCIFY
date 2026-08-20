@@ -179,7 +179,7 @@ def create_profile(user_id: str, profile_in: schemas.UserProfileCreate, db: Data
     return profile
 
 
-@app.get("/profile/{user_id}")
+@app.get("/profile/{user_id}", response_model=schemas.UserProfileResponse)
 def get_profile(user_id: str, db: Database = Depends(database.get_db)):
     profile = db.user_profiles.find_one({"user_id": user_id})
     if not profile:
