@@ -52,10 +52,17 @@ export default function Assessment() {
   const stopRecording = () => {
     if (mediaRecorderRef.current && isRecording) {
       mediaRecorderRef.current.onstop = async () => {
-        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
         const tracks = mediaRecorderRef.current.stream.getTracks();
         tracks.forEach(track => track.stop());
+
+        if (recordingTime < 5) {
+          alert("Recording is too short! Please read the entire passage.");
+          setStep(1);
+          setRecordingTime(0);
+          return;
+        }
         
+        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
         setStep(2); // Analyzing state
         setAnalyzing(true);
         await submitAudio(audioBlob);
@@ -73,7 +80,9 @@ export default function Assessment() {
       const response = await axios.post('https://fluencify-api.onrender.com/analyze_audio', formData);
       const analysisData = response.data;
       
-      if (analysisData.total_words === 0) {
+      // The passage is ~33 words. If the AI detects less than 10 words, 
+      // it was likely just background noise or a false start.
+      if (analysisData.total_words < 10) {
         setResult({ isSilent: true });
         setStep(3);
       } else {
