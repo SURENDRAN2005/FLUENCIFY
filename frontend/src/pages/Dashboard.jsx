@@ -125,7 +125,7 @@ export default function Dashboard() {
           <div className="space-y-8 animate-fade-in">
             <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
               <div>
-                <h1 className="text-3xl font-black text-gray-900 tracking-tight break-all">Good morning, {username}!</h1>
+                <h1 className="text-3xl font-black text-gray-900 tracking-tight break-all">Hello, {username}!</h1>
                 <p className="text-gray-500 font-medium mt-1">Ready to improve your fluency today?</p>
               </div>
               <div className="flex items-center gap-4">
