@@ -419,22 +419,30 @@ export default function Dashboard() {
       </main>
 
       {/* Mobile Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex lg:hidden justify-around items-center h-20 px-2 z-50 pb-safe">
+      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex lg:hidden justify-between items-center h-20 px-1 z-50 pb-safe shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
         <button onClick={() => setActiveTab('Home')} className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${activeTab === 'Home' ? 'text-primary-600' : 'text-gray-400 hover:text-gray-600'}`}>
-          <Home className="w-6 h-6" />
-          <span className="text-[10px] font-bold">Home</span>
+          <Home className="w-5 h-5 sm:w-6 sm:h-6" />
+          <span className="text-[9px] sm:text-[10px] font-bold">Home</span>
         </button>
         <button onClick={() => navigate('/practice')} className="flex flex-col items-center justify-center w-full h-full space-y-1 text-gray-400 hover:text-gray-600">
-          <Mic className="w-6 h-6" />
-          <span className="text-[10px] font-bold">Practice</span>
+          <Mic className="w-5 h-5 sm:w-6 sm:h-6" />
+          <span className="text-[9px] sm:text-[10px] font-bold">Practice</span>
         </button>
         <button onClick={() => setActiveTab('Progress')} className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${activeTab === 'Progress' ? 'text-primary-600' : 'text-gray-400 hover:text-gray-600'}`}>
-          <TrendingUp className="w-6 h-6" />
-          <span className="text-[10px] font-bold">Progress</span>
+          <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6" />
+          <span className="text-[9px] sm:text-[10px] font-bold">Progress</span>
+        </button>
+        <button onClick={() => setActiveTab('Levels')} className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${activeTab === 'Levels' ? 'text-primary-600' : 'text-gray-400 hover:text-gray-600'}`}>
+          <Target className="w-5 h-5 sm:w-6 sm:h-6" />
+          <span className="text-[9px] sm:text-[10px] font-bold">Levels</span>
+        </button>
+        <button onClick={() => setActiveTab('Rewards')} className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${activeTab === 'Rewards' ? 'text-primary-600' : 'text-gray-400 hover:text-gray-600'}`}>
+          <Gift className="w-5 h-5 sm:w-6 sm:h-6" />
+          <span className="text-[9px] sm:text-[10px] font-bold">Rewards</span>
         </button>
         <button onClick={() => setActiveTab('Profile')} className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${activeTab === 'Profile' ? 'text-primary-600' : 'text-gray-400 hover:text-gray-600'}`}>
-          <User className="w-6 h-6" />
-          <span className="text-[10px] font-bold">Profile</span>
+          <User className="w-5 h-5 sm:w-6 sm:h-6" />
+          <span className="text-[9px] sm:text-[10px] font-bold">Profile</span>
         </button>
       </nav>
     </div>
