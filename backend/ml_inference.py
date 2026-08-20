@@ -34,23 +34,13 @@ HOP_MS       = 10        # librosa hop length in ms
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 print("Loading ML models for inference...")
-try:
-    processor    = Wav2Vec2FeatureExtractor.from_pretrained(MODEL_NAME)
-    hubert_model = HubertModel.from_pretrained(MODEL_NAME).to(device)
-    hubert_model.eval()
-    HUBERT_LOADED = True
-    print("HuBERT model loaded.")
-except Exception as e:
-    print(f"HuBERT load failed (will use acoustic-only mode): {e}")
-    HUBERT_LOADED = False
 
-try:
-    svm_clf = joblib.load("fluency_svm_model.pkl")
-    SVM_LOADED = True
-    print("SVM classifier loaded.")
-except Exception as e:
-    print(f"SVM load skipped: {e}")
-    SVM_LOADED = False
+# To prevent Render Free Tier Out-Of-Memory (OOM) errors (512MB limit),
+# we disable loading the heavy 360MB HuBERT model in production.
+# The scoring is fully handled by the `_acoustic_analysis` function below anyway!
+HUBERT_LOADED = False
+SVM_LOADED = False
+print("Skipped loading heavy PyTorch models to save RAM for Free Tier.")
 
 
 # ─── Acoustic analysis ────────────────────────────────────────────────────────
