@@ -153,7 +153,7 @@ export default function Assessment() {
               /* --- RECORDING STATE: compact card + fixed stop button --- */
               <div className="w-full flex flex-col items-center">
                 {/* Compact passage reminder */}
-                <div className="bg-primary-50 text-primary-700 px-6 py-3 rounded-2xl border border-primary-100 text-sm font-medium w-full mb-6 text-center line-clamp-2">
+                <div className="bg-primary-50 text-primary-700 px-4 py-4 rounded-2xl border border-primary-100 text-sm md:text-base font-medium w-full mb-6 text-center leading-relaxed">
                   {passage}
                 </div>
 
