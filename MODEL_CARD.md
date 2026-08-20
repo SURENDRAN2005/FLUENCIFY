@@ -10,8 +10,8 @@
 * **Out of Scope:** Clinical diagnosis of stuttering/stammering severity. Not intended for use outside of the structured 7-Level Fluency Ladder exercises.
 
 ## 3. Training Data
-* **Source:** 500 synthetically generated audio clips using Python text-to-speech logic, augmented with programmatic disfluencies (silence gaps for blocks, character repetition for repetitions, temporal stretching for prolongations, and injected "um"/"uh" for interjections).
-* **Distribution:** 100 clips per class to ensure perfectly balanced class weights during the Hackathon phase.
+* **Source:** 1000 synthetically generated audio clips using Python text-to-speech logic, augmented with programmatic disfluencies (silence gaps for blocks, character repetition for repetitions, temporal stretching for prolongations, and injected "um"/"uh" for interjections).
+* **Distribution:** 200 clips per class to ensure perfectly balanced class weights.
 
 ## 4. Evaluation Metrics
 * **Overall F1 Score (Validation):** 0.952 
