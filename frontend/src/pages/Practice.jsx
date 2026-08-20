@@ -26,7 +26,7 @@ export default function Practice() {
       if (!userId) { navigate('/'); return; }
       
       try {
-        const pRes = await axios.get(`http://127.0.0.1:8000/progress/${userId}`);
+        const pRes = await axios.get(`https://fluencify-api.onrender.com/progress/${userId}`);
         const userMaxLevel = pRes.data.level || 1;
         
         // Use targetLevel from navigation state if it exists and is <= userMaxLevel
@@ -34,7 +34,7 @@ export default function Practice() {
         const activeLevel = (targetLevel && targetLevel <= userMaxLevel) ? targetLevel : userMaxLevel;
         
         setLevel(activeLevel);
-        const eRes = await axios.post(`http://127.0.0.1:8000/exercise/generate`, {
+        const eRes = await axios.post(`https://fluencify-api.onrender.com/exercise/generate`, {
           user_id: userId, level: activeLevel, weak_phonemes: [], speech_metrics: {}
         });
         setExercise(eRes.data);
@@ -98,14 +98,14 @@ export default function Practice() {
     formData.append("file", audioBlob, "practice.webm");
     
     try {
-      const response = await axios.post('http://127.0.0.1:8000/analyze_audio', formData);
+      const response = await axios.post('https://fluencify-api.onrender.com/analyze_audio', formData);
       const analysisData = response.data;
       
       if (analysisData.total_words === 0) {
         setResult({ isSilent: true });
       } else {
         const userId = localStorage.getItem('userId');
-        const sessionRes = await axios.post('http://127.0.0.1:8000/session', {
+        const sessionRes = await axios.post('https://fluencify-api.onrender.com/session', {
           user_id: userId,
           level: level,
           transcript: exercise.exercise_text || '',

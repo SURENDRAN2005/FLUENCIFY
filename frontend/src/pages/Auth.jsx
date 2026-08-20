@@ -17,7 +17,7 @@ export default function Auth() {
 
     try {
       const endpoint = isLogin ? '/auth/login' : '/auth/register';
-      const response = await axios.post(`http://127.0.0.1:8000${endpoint}`, {
+      const response = await axios.post(`https://fluencify-api.onrender.com${endpoint}`, {
         username,
         password
       });
@@ -35,10 +35,10 @@ export default function Auth() {
       
       try {
         // Check profile
-        await axios.get(`http://127.0.0.1:8000/profile/${userId}`);
+        await axios.get(`https://fluencify-api.onrender.com/profile/${userId}`);
         
         // Profile exists, check progress
-        const prog = await axios.get(`http://127.0.0.1:8000/progress/${userId}`);
+        const prog = await axios.get(`https://fluencify-api.onrender.com/progress/${userId}`);
         if (prog.data.level === 0) {
           navigate('/assessment');
         } else {

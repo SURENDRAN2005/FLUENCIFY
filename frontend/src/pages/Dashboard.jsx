@@ -26,7 +26,7 @@ export default function Dashboard() {
       const userId = localStorage.getItem('userId');
       if (!userId) { setLoading(false); return; }
       try {
-        const res = await axios.get(`http://127.0.0.1:8000/progress/${userId}`);
+        const res = await axios.get(`https://fluencify-api.onrender.com/progress/${userId}`);
         setData(res.data);
       } catch (e) {
         console.error("Progress fetch failed", e);

@@ -31,7 +31,7 @@ export default function Onboarding() {
     setLoading(true);
     const userId = localStorage.getItem('userId');
     try {
-      await axios.post(`http://127.0.0.1:8000/profile/${userId}`, finalProfile);
+      await axios.post(`https://fluencify-api.onrender.com/profile/${userId}`, finalProfile);
       navigate('/assessment');
     } catch (error) {
       console.error("Failed to save profile:", error);

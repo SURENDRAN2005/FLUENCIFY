@@ -70,7 +70,7 @@ export default function Assessment() {
     formData.append("file", audioBlob, "assessment.webm");
     
     try {
-      const response = await axios.post('http://127.0.0.1:8000/analyze_audio', formData);
+      const response = await axios.post('https://fluencify-api.onrender.com/analyze_audio', formData);
       const analysisData = response.data;
       
       if (analysisData.total_words === 0) {
@@ -81,7 +81,7 @@ export default function Assessment() {
         let assignedLevel = 1;
         const userId = localStorage.getItem('userId');
         if (userId) {
-          const assessRes = await axios.post('http://127.0.0.1:8000/assessment/submit', {
+          const assessRes = await axios.post('https://fluencify-api.onrender.com/assessment/submit', {
             user_id: userId,
             scores: analysisData
           });
