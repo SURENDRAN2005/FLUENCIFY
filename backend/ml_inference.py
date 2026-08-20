@@ -17,11 +17,8 @@ The HuBERT model is still loaded and used to produce a per-window embedding
 for future fine-tuning, but scoring is done acoustically.
 """
 
-import torch
 import librosa
 import numpy as np
-import joblib
-from transformers import Wav2Vec2FeatureExtractor, HubertModel
 import io
 import subprocess
 import imageio_ffmpeg
@@ -31,7 +28,7 @@ SAMPLE_RATE  = 16000
 FRAME_MS     = 30        # librosa frame length in ms
 HOP_MS       = 10        # librosa hop length in ms
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
+device = "cpu"
 
 print("Loading ML models for inference...")
 
