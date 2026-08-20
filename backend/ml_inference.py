@@ -153,9 +153,14 @@ def _acoustic_analysis(audio: np.ndarray, sr: int) -> dict:
                     prolongation_count += 1
 
     # ── Speech rate & word count estimate ────────────────────────────────────
+    audio_duration = max(0.1, len(audio) / sr)
     total_speech_s = float(is_speech.sum()) * frame_duration_s
+    speech_ratio = total_speech_s / audio_duration
     
-    if total_speech_s == 0:
+    # If the "speech" energy takes up >95% of the entire recording, it means there are 
+    # NO natural pauses or syllable boundaries (energy valleys). This is physically 
+    # impossible for human speech over a few seconds, meaning it's constant background noise.
+    if total_speech_s == 0 or (audio_duration > 3.0 and speech_ratio > 0.95):
         return {
             "block_count":        0,
             "repetition_count":   0,
@@ -168,7 +173,7 @@ def _acoustic_analysis(audio: np.ndarray, sr: int) -> dict:
     # Assume ~3.5 syllables per second for typical English speech
     estimated_syllables = total_speech_s * 3.5
     estimated_words     = max(0, int(estimated_syllables / 1.5))   # ~1.5 syllables/word
-    speech_rate_spm     = (estimated_syllables / max(0.1, len(audio) / sr)) * 60  # syllables/min
+    speech_rate_spm     = (estimated_syllables / audio_duration) * 60  # syllables/min
 
     return {
         "block_count":        block_count,
