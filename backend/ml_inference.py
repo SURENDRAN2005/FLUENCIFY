@@ -62,9 +62,13 @@ def _acoustic_analysis(audio: np.ndarray, sr: int) -> dict:
     rms_db = librosa.amplitude_to_db(rms + 1e-9)
     peak_db = rms_db.max()
 
-    # 1b. Absolute silence check (filters out mic background noise when user says nothing)
-    # Raised to -20.0 dB to catch loud continuous static from auto-gain microphones
-    if peak_db < -20.0:
+    # 1b. Absolute silence & background static check
+    # Check 1: If the peak energy is extremely low, it's digital silence
+    # Check 2: If the standard deviation (variance) of energy is very low, it is constant 
+    #          background noise (e.g., fans, static, AGC hum), not human speech which is dynamic.
+    rms_std = float(np.std(rms_db))
+    
+    if peak_db < -30.0 or rms_std < 4.0:
         return {
             "block_count":        0,
             "repetition_count":   0,
