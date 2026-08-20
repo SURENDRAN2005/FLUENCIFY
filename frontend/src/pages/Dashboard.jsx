@@ -366,7 +366,7 @@ export default function Dashboard() {
              <div className="bg-white rounded-[2rem] p-10 border border-gray-100 shadow-card flex flex-col items-center text-center relative overflow-hidden">
                <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-r from-primary-400 to-purple-500"></div>
                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Surendran&mouth=smile&eyes=happy" alt="Avatar" className="w-32 h-32 bg-gray-100 rounded-full mb-6 border-8 border-white shadow-lg relative z-10" />
-               <h2 className="text-3xl font-black text-gray-900 tracking-tight truncate w-full px-4">{username}</h2>
+               <h2 className="text-3xl font-black text-gray-900 tracking-tight break-all w-full px-4">{username}</h2>
                <p className="text-primary-600 font-bold mb-8">Level {level} • {levelMeta.name}</p>
                
                <div className="w-full grid grid-cols-2 gap-4 mb-8 text-left">
